@@ -1,138 +1,222 @@
-import './App.css';
-import NetworkGraph3DExact from './components/NetworkGraph3DExact';
-import InfluenceRankingExact from './components/InfluenceRankingExact';
+import './index.css';
+import { useState, useEffect } from 'react';
+import { Sidebar } from './components/layout/Sidebar';
+import { Topbar } from './components/layout/Topbar';
+import { MainContent } from './components/dashboard/MainContent';
+import { RankingPanel } from './components/dashboard/RankingPanel';
+import BottomNavigation from './components/layout/BottomNavigation';
+import ComponentsDemo from './components/demo/ComponentsDemo';
+import AdvancedComponentsDemo from './components/demo/AdvancedComponentsDemo2';
+import AdvancedUIComponentsDemo from './components/demo/AdvancedUIComponentsDemo';
+import GraphInteractionsDemo from './components/demo/GraphInteractionsDemo';
+import AdvancedFeaturesDemo from './components/demo/AdvancedFeaturesDemo';
+import AdvancedNavigationDemo from './components/demo/AdvancedNavigationDemo';
+import AdvancedInteractionsDemo from './components/demo/AdvancedInteractionsDemo';
+import NetworkGraphDemo from './components/demo/NetworkGraphDemo';
+import EmptyComponentsDemo from './components/demo/EmptyComponentsDemo';
+import FinalPagesDemo from './components/demo/FinalPagesDemo';
+import SolarSystemDemo from './components/demo/SolarSystemDemo';
 
 function App() {
+  // États selon spécifications exactes - Sidebar masquée par défaut selon cahier des charges
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(true);
+  const [activeTab, setActiveTab] = useState('Network');
+  const [activeNavItem, setActiveNavItem] = useState('dashboard');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [isMobile, setIsMobile] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState('dashboard'); // Pour navigation
+
+  // Données de démonstration
+  const notifications = [
+    { id: 1, text: 'New project created', time: '2 min ago', read: false },
+    { id: 2, text: 'Task assigned to you', time: '5 min ago', read: false },
+    { id: 3, text: 'Weekly report ready', time: '1h ago', read: true }
+  ];
+
+  // Responsive sidebar selon spécifications exactes
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth < 900;
+      setIsMobile(mobile);
+      if (mobile) {
+        setSidebarCollapsed(true);
+        setSidebarOpen(false);
+      } else {
+        setSidebarCollapsed(false);
+        setSidebarOpen(true);
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Handlers selon spécifications exactes
+  const handleToggleSidebar = () => {
+    if (isMobile) {
+      setSidebarOpen(!sidebarOpen);
+    } else {
+      setSidebarCollapsed(!sidebarCollapsed);
+    }
+  };
+
+  const handleNavItemClick = (itemId) => {
+    setActiveNavItem(itemId);
+    setCurrentPage(itemId);
+    if (isMobile) {
+      setSidebarOpen(false);
+    }
+  };
+
+  const handleCloseSidebar = () => {
+    if (isMobile) {
+      setSidebarOpen(false);
+    }
+  };
+
+  const handleNewProject = () => {
+    console.log('Nouveau projet créé');
+    // Slot pour logique métier future
+  };
+
+  const handleSearch = (term) => {
+    setSearchTerm(term);
+    console.log('Recherche:', term);
+    // Slot pour logique de recherche future
+  };
+
+  const handleTabChange = (tabId) => {
+    setActiveTab(tabId);
+    console.log('Tab changé:', tabId);
+    // Slot pour logique de changement d'onglet future
+  };
+
+  const handleNavItemChange = (itemId) => {
+    setActiveNavItem(itemId);
+    console.log('Navigation changée:', itemId);
+    // Slot pour logique de navigation future
+  };
+
+  const handleAddItem = () => {
+    console.log('Ajouter un élément');
+    // Slot pour logique d'ajout future
+  };
+
+  const handleNotificationClick = () => {
+    console.log('Notifications cliquées');
+    // Slot pour logique de notifications future
+  };
+
+  const handleUserMenuClick = () => {
+    console.log('Menu utilisateur cliqué');
+    // Slot pour logique de menu utilisateur future
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0a192f] to-black text-white">
+    <div className="min-h-screen bg-[#181E29] text-[#F1F5F9]">
       <div className="flex">
-        {/* Sidebar */}
-        <aside className="w-64 bg-gray-900/50 backdrop-blur-sm p-4 border-r border-gray-800">
-          <div className="flex items-center mb-8">
-            <div className="w-8 h-8 bg-blue-500 rounded-full mr-2 flex items-center justify-center">
-              <span className="text-white text-sm font-bold">H</span>
-            </div>
-            <h1 className="text-xl font-bold">handshake</h1>
-          </div>
-          <nav>
-            <ul>
-              <li className="mb-4">
-                <a href="#" className="text-blue-400 hover:text-blue-300 flex items-center">
-                  <span className="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>
-                  Dashboard
-                </a>
-              </li>
-              <li className="mb-4">
-                <a href="#" className="text-gray-400 hover:text-white flex items-center">
-                  <span className="w-2 h-2 bg-transparent rounded-full mr-3"></span>
-                  Projects
-                </a>
-              </li>
-              <li className="mb-4">
-                <a href="#" className="text-gray-400 hover:text-white flex items-center">
-                  <span className="w-2 h-2 bg-transparent rounded-full mr-3"></span>
-                  Team
-                </a>
-              </li>
-              <li className="mb-4">
-                <a href="#" className="text-gray-400 hover:text-white flex items-center">
-                  <span className="w-2 h-2 bg-transparent rounded-full mr-3"></span>
-                  Reports
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </aside>
+        {/* Sidebar selon spécifications exactes avec responsive */}
+        <Sidebar 
+          collapsed={sidebarCollapsed}
+          onToggleCollapse={handleToggleSidebar}
+          activeItem={activeNavItem}
+          onItemClick={handleNavItemClick}
+          isMobile={isMobile}
+          isOpen={sidebarOpen}
+          onClose={handleCloseSidebar}
+        />
 
-        {/* Main Content */}
-        <main className="flex-1 p-8">
-          {/* Top Bar */}
-          <header className="flex justify-between items-center mb-8">
-            <div>
-              <h2 className="text-3xl font-bold">United Nations Conference on Trade and Development (UNCTAD)</h2>
-              <p className="text-gray-400 mt-1">Topic: National Policy</p>
-            </div>
-            <div className="flex items-center space-x-6">
-              <div className="flex items-center space-x-2">
-                <span className="w-2 h-2 bg-green-400 rounded-full"></span>
-                <span className="text-sm">4 Grouped</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <span className="w-2 h-2 bg-blue-400 rounded-full"></span>
-                <span className="text-sm">3 Favorites</span>
-              </div>
-              <div className="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center">
-                <span className="text-xs">U</span>
-              </div>
-            </div>
-          </header>
+        {/* Main Content Area */}
+        <div className="flex-1 flex flex-col min-h-screen">
+          {/* Topbar selon spécifications exactes avec responsive */}
+          <Topbar 
+            title="Dashboard"
+            onToggleSidebar={handleToggleSidebar}
+            showMobileMenu={isMobile}
+            notifications={notifications}
+            onNewProject={handleNewProject}
+            onNotificationClick={handleNotificationClick}
+            onUserMenuClick={handleUserMenuClick}
+            isMobile={isMobile}
+          />
 
-          {/* Search and Filters */}
-          <div className="flex justify-between items-center mb-8">
-            <div className="flex items-center">
-              <div className="relative">
-                <input 
-                  type="text" 
-                  placeholder="Search Influencer, organization or event" 
-                  className="bg-gray-800/50 border border-gray-700 rounded-lg px-4 py-3 w-96 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 transition-colors" 
-                />
-                <div className="absolute right-3 top-3">
-                  <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                  </svg>
-                </div>
-              </div>
-            </div>
-            <div className="flex items-center space-x-6 text-sm">
-              <div className="flex items-center space-x-2">
-                <span className="text-gray-400">Score:</span>
-                <span className="text-blue-400 font-semibold">40</span>
-                <div className="w-16 h-1 bg-gray-700 rounded-full">
-                  <div className="w-1/2 h-1 bg-blue-400 rounded-full"></div>
-                </div>
-                <span className="text-blue-400 font-semibold">80</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <span className="text-gray-400">Actors:</span>
-                <span className="text-white">All</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <span className="text-gray-400">Geographic:</span>
-                <span className="text-white">USA, Canada</span>
-              </div>
-            </div>
-          </div>
+                      {/* Contenu conditionnel selon la page */}
+                      {currentPage === 'demo' ? (
+                        <ComponentsDemo />
+                      ) : currentPage === 'advanced-demo' ? (
+                        <AdvancedComponentsDemo />
+                      ) : currentPage === 'ui-components' ? (
+                        <AdvancedUIComponentsDemo />
+                      ) : currentPage === 'graph-interactions' ? (
+                        <GraphInteractionsDemo />
+                      ) : currentPage === 'advanced-features' ? (
+                        <AdvancedFeaturesDemo />
+                      ) : currentPage === 'navigation' ? (
+                        <AdvancedNavigationDemo />
+                      ) : currentPage === 'interactions' ? (
+                        <AdvancedInteractionsDemo />
+                      ) : currentPage === 'components' ? (
+                        <AdvancedComponentsDemo />
+                      ) : currentPage === 'network-graph' ? (
+                        <NetworkGraphDemo />
+                      ) : currentPage === 'empty-components' ? (
+                        <EmptyComponentsDemo />
+                      ) : currentPage === 'final-pages' ? (
+                        <FinalPagesDemo />
+                      ) : currentPage === 'solar-system' ? (
+                        <SolarSystemDemo />
+                      ) : (
+            <div className={`flex-1 flex ${isMobile ? 'flex-col gap-4 p-4' : 'gap-6 p-8'}`}>
+              <MainContent 
+                title="Influence Dashboard"
+                subtitle="Monitor and analyze influence networks"
+                onSearch={handleSearch}
+                activeTab={activeTab}
+                onTabChange={handleTabChange}
+                isMobile={isMobile}
+              />
 
-          {/* Network Graph and Ranking */}
-          <div className="flex gap-6">
-            {/* Network Graph */}
-            <div className="w-2/3 bg-gray-900/30 backdrop-blur-sm rounded-lg p-6 border border-gray-800">
-              <div className="flex mb-6">
-                <button className="bg-blue-600 hover:bg-blue-700 rounded-lg px-4 py-2 mr-2 text-sm font-medium transition-colors">
-                  Network
-                </button>
-                <button className="bg-gray-800 hover:bg-gray-700 rounded-lg px-4 py-2 text-sm font-medium transition-colors">
-                  Heatmap
-                </button>
-                <div className="ml-auto flex items-center space-x-4 text-sm text-gray-400">
-                  <button className="hover:text-white transition-colors">+</button>
-                  <button className="hover:text-white transition-colors">−</button>
-                </div>
-              </div>
-              <NetworkGraph3DExact />
+              {/* Ranking Panel selon spécifications exactes avec responsive */}
+              <RankingPanel 
+                title="Influence Ranking"
+                stats={{
+                  totalInfluencers: 24,
+                  avgScore: 8.7
+                }}
+                onAddItem={handleAddItem}
+                isMobile={isMobile}
+              />
             </div>
-
-            {/* Influence Ranking */}
-            <div className="w-1/3 bg-gray-900/30 backdrop-blur-sm rounded-lg p-6 border border-gray-800">
-              <InfluenceRankingExact />
-            </div>
-          </div>
-        </main>
+          )}
+        </div>
       </div>
+      
+                  {/* Navigation mobile bottom */}
+                  <BottomNavigation 
+                    activeItem={activeNavItem}
+                    onItemClick={(index, item) => {
+                      const pageMap = {
+                        'Dashboard': 'dashboard',
+                        'Demo': 'demo',
+                        'UI': 'ui-components',
+                        'Interact': 'interactions',
+                        'Features': 'advanced-features',
+                        'Nav': 'navigation',
+                        'Comp': 'components',
+                        'Network': 'network-graph',
+                        'Empty': 'empty-components',
+                        'Final': 'final-pages',
+                        'Solar': 'solar-system'
+                      };
+                      const page = pageMap[item.label] || 'dashboard';
+                      setActiveNavItem(page);
+                      setCurrentPage(page);
+                    }}
+                  />
     </div>
   );
 }
 
 export default App;
-
-

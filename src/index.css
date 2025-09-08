@@ -1,0 +1,1366 @@
+@import "tailwindcss";
+
+/* ZONE 5 : VARIABLES CSS CUSTOM POUR PIXEL-PERFECT */
+:root {
+  /* Palette de couleurs exacte */
+  --color-bg: #181E29;           /* Fond global */
+  --color-panel: #232B3E;        /* Panels/sidebar/topbar */
+  --color-input: #222C3B;        /* Inputs/search */
+  --color-primary: #3B82F6;      /* Bleu bouton/tab actif */
+  --color-accent: #2563eb;       /* Bleu hover bouton/tab */
+  --color-text-main: #F1F5F9;    /* Texte principal */
+  --color-text-sub: #AAB7C6;     /* Sous-titre/placeholder */
+  --color-border: #222C3B;        /* Borders/tabs */
+  --color-danger: #EF4444;        /* Badge notif */
+  --color-success: #22C55E;       /* Vert statut */
+  
+  /* Radius personnalisés */
+  --radius-xl: 1.25rem;          /* ~20px */
+  --radius-2xl: 1.5rem;          /* ~24px */
+  --radius-full: 9999px;
+  
+  /* Ombres personnalisées */
+  --shadow-panel: 0 6px 24px 0 rgba(30, 41, 59, 0.24);
+  --shadow-focus: 0 0 0 3px #3B82F6;
+  --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  
+  /* Transitions */
+  --transition-fast: 120ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ZONE 11 : RESPONSIVE DESIGN BREAKPOINTS DÉTAILLÉS */
+@custom-variant mobile (&:is(.mobile *));
+@custom-variant tablet (&:is(.tablet *));
+@custom-variant desktop (&:is(.desktop *));
+
+/* Breakpoints selon spécifications exactes */
+@media (min-width: 1200px) {
+  .desktop-xl {
+    /* Desktop XL : >1200px - sidebar pleine, panel droit à côté, paddings larges */
+  }
+}
+
+@media (min-width: 900px) and (max-width: 1199px) {
+  .desktop {
+    /* Desktop : 900-1200px - sidebar pleine, panel droit un peu plus compact */
+  }
+}
+
+@media (min-width: 700px) and (max-width: 899px) {
+  .tablet {
+    /* Tablet : 700-900px - sidebar compact, panel droit en-dessous, tout stacké */
+  }
+}
+
+@media (max-width: 699px) {
+  .mobile {
+    /* Mobile : <700px - sidebar drawer, panel droit full width sous main, padding min */
+  }
+}
+
+/* ZONE 12 : ACCESSIBILITÉ DÉTAILLÉE */
+@layer base {
+  * {
+    outline: 2px solid transparent;
+  }
+  
+  body {
+    @apply bg-[#181E29] text-[#F1F5F9];
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Focus visible pour accessibilité selon spécifications exactes */
+  *:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: 0.5rem;
+  }
+  
+  /* Focus ring spécifique pour boutons */
+  .focus-ring {
+    @apply focus-visible:ring-2 focus-visible:ring-[#3B82F6] focus-visible:ring-offset-2;
+  }
+  
+  /* Focus trap pour modales et drawers */
+  .focus-trap {
+    @apply focus-visible:outline-none;
+  }
+  
+  /* High contrast mode support selon spécifications exactes */
+  @media (prefers-contrast: high) {
+    :root {
+      --color-bg: #000000;
+      --color-panel: #1a1a1a;
+      --color-text-main: #ffffff;
+      --color-text-sub: #cccccc;
+      --color-primary: #66b3ff;
+      --color-border: #ffffff;
+    }
+    
+    .focus-visible {
+      outline: 3px solid #66b3ff !important;
+      outline-offset: 3px !important;
+    }
+  }
+  
+  /* Reduced motion support selon spécifications exactes */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      transform: none !important;
+    }
+    
+    .motion-safe\:animate-none {
+      animation: none !important;
+    }
+  }
+  
+  /* Skip links pour navigation clavier */
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4;
+    @apply bg-[#3B82F6] text-white px-4 py-2 rounded-lg z-50;
+  }
+  
+  /* Screen reader only text */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  
+  .not-sr-only {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+}
+
+/* ZONE 8 : MICRO-INTERACTIONS & ANIMATIONS */
+@layer components {
+  /* Bouton principal avec micro-interactions */
+  .btn-main {
+    @apply relative px-6 py-3 rounded-xl bg-[#3B82F6] text-white font-semibold text-base shadow-lg;
+    @apply hover:bg-[#2563eb] hover:shadow-xl hover:scale-105;
+    @apply focus-visible:ring-2 focus-visible:ring-[#3B82F6] focus-visible:ring-offset-2;
+    @apply active:scale-95 transition-all duration-120;
+  }
+  
+  /* Sidebar navigation items */
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.75rem 0;
+    width: 100%;
+    border-radius: 0.75rem;
+    transition: all 120ms ease-out;
+    outline: none;
+  }
+  
+  .nav-item:hover {
+    background-color: #222C3B;
+    transform: scale(1.04);
+  }
+  
+  .nav-item:focus-visible {
+    ring: 2px solid #3B82F6;
+  }
+  
+  .nav-item.active {
+    background-color: #3B82F6;
+    color: white;
+    border-left: 4px solid #3B82F6;
+  }
+  
+  .nav-item:not(.active) {
+    color: #AAB7C6;
+  }
+  
+  .nav-item:not(.active):hover {
+    color: white;
+  }
+  
+  /* Tabs avec animation */
+  .tab {
+    padding: 0.75rem 2rem;
+    border-radius: 0.75rem;
+    font-weight: bold;
+    transition: all 150ms ease-out;
+  }
+  
+  .tab:focus-visible {
+    ring: 2px solid #3B82F6;
+  }
+  
+  .tab:hover {
+    transform: scale(1.05);
+  }
+  
+  .tab.active {
+    background-color: #3B82F6;
+    color: white;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+  
+  .tab:not(.active) {
+    background-color: transparent;
+    color: #3B82F6;
+    border: 1px solid #3B82F6;
+  }
+  
+  .tab:not(.active):hover {
+    color: white;
+    background-color: #222C3B;
+  }
+  
+  /* Search bar avec focus */
+  .search-bar {
+    width: 100%;
+    max-width: 32rem;
+    display: flex;
+    align-items: center;
+    background-color: #222C3B;
+    border-radius: 0.75rem;
+    height: 3rem;
+    padding: 0 1rem;
+    transition: all 200ms ease-out;
+  }
+  
+  .search-bar:focus-within {
+    ring: 2px solid #3B82F6;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Panel cards */
+  .panel-card {
+    background-color: #232B3E;
+    border-radius: 0.75rem;
+    padding: 2rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    transition: all 300ms ease-out;
+  }
+  
+  .panel-card:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    transform: translateY(-4px);
+  }
+  
+  /* Mini-cards dans ranking */
+  .mini-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    background-color: #222C3B;
+    border-radius: 0.75rem;
+    transition: all 200ms ease-out;
+    cursor: pointer;
+  }
+  
+  .mini-card:hover {
+    background-color: #2A3142;
+    transform: scale(1.02);
+  }
+  
+  .mini-card:focus {
+    outline: none;
+    ring: 2px solid #3B82F6;
+  }
+  
+  /* Notification badge avec animation */
+  .notification-badge {
+    position: absolute;
+    top: -0.25rem;
+    right: -0.25rem;
+    width: 1rem;
+    height: 1rem;
+    background-color: #EF4444;
+    font-size: 0.75rem;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    animation: pulse 2s infinite;
+  }
+  
+  /* Avatar avec hover */
+  .avatar {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background-color: #181E29;
+    border: 2px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #AAB7C6;
+    font-size: 1.125rem;
+    font-weight: bold;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: all 200ms ease-out;
+    cursor: pointer;
+  }
+  
+  .avatar:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    transform: scale(1.05);
+  }
+}
+
+/* ZONE 9 : ANIMATIONS KEYFRAMES */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  0% {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+/* ZONE 11 : UTILITAIRES RESPONSIVE DÉTAILLÉS */
+@layer utilities {
+  /* Sidebar responsive selon spécifications exactes */
+  .sidebar-desktop-xl {
+    @apply w-[90px];
+  }
+  
+  .sidebar-desktop {
+    @apply w-[90px];
+  }
+  
+  .sidebar-tablet {
+    @apply w-14;
+  }
+  
+  .sidebar-mobile {
+    @apply w-14;
+  }
+  
+  .sidebar-drawer {
+    @apply fixed inset-y-0 left-0 z-50 w-[90px] transform -translate-x-full;
+    @apply transition-transform duration-180 ease-[cubic-bezier(0.42,0,0.58,1)];
+  }
+  
+  .sidebar-drawer.open {
+    @apply translate-x-0;
+  }
+  
+  /* Panels responsive selon spécifications exactes */
+  .panel-desktop-xl {
+    @apply min-h-[320px] p-10;
+  }
+  
+  .panel-desktop {
+    @apply min-h-[320px] p-8;
+  }
+  
+  .panel-tablet {
+    @apply min-h-[240px] p-6;
+  }
+  
+  .panel-mobile {
+    @apply min-h-[180px] p-4;
+  }
+  
+  /* Text responsive selon spécifications exactes */
+  .text-responsive {
+    font-size: 1.875rem; /* text-3xl */
+  }
+  
+  @media (min-width: 1200px) {
+    .text-responsive {
+      font-size: 2.25rem; /* text-4xl */
+    }
+  }
+  
+  @media (max-width: 699px) {
+    .text-responsive {
+      font-size: 1.5rem; /* text-2xl */
+    }
+  }
+  
+  .text-sub-responsive {
+    font-size: 1.125rem; /* text-lg */
+  }
+  
+  @media (max-width: 699px) {
+    .text-sub-responsive {
+      font-size: 1rem; /* text-base */
+    }
+  }
+  
+  /* Padding responsive selon spécifications exactes */
+  .padding-responsive {
+    padding: 2rem; /* p-8 */
+  }
+  
+  @media (min-width: 1200px) {
+    .padding-responsive {
+      padding: 2.5rem; /* p-10 */
+    }
+  }
+  
+  @media (min-width: 700px) and (max-width: 899px) {
+    .padding-responsive {
+      padding: 1.5rem; /* p-6 */
+    }
+  }
+  
+  @media (max-width: 699px) {
+    .padding-responsive {
+      padding: 1rem; /* p-4 */
+    }
+  }
+  
+  .padding-topbar-responsive {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  
+  @media (min-width: 700px) and (max-width: 899px) {
+    .padding-topbar-responsive {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+  
+  @media (max-width: 699px) {
+    .padding-topbar-responsive {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+  
+  /* Gap responsive selon spécifications exactes */
+  .gap-responsive {
+    gap: 1.5rem; /* gap-6 */
+  }
+  
+  @media (min-width: 1200px) {
+    .gap-responsive {
+      gap: 2rem; /* gap-8 */
+    }
+  }
+  
+  @media (min-width: 700px) and (max-width: 899px) {
+    .gap-responsive {
+      gap: 1rem; /* gap-4 */
+    }
+  }
+  
+  @media (max-width: 699px) {
+    .gap-responsive {
+      gap: 0.75rem; /* gap-3 */
+    }
+  }
+  
+  .gap-actions-responsive {
+    gap: 2rem; /* gap-8 */
+  }
+  
+  @media (min-width: 700px) and (max-width: 899px) {
+    .gap-actions-responsive {
+      gap: 1.5rem; /* gap-6 */
+    }
+  }
+  
+  @media (max-width: 699px) {
+    .gap-actions-responsive {
+      gap: 1rem; /* gap-4 */
+    }
+  }
+  
+  /* Layout responsive selon spécifications exactes */
+  .layout-responsive {
+    display: flex;
+  }
+  
+  @media (min-width: 1200px) {
+    .layout-responsive {
+      flex-direction: row;
+    }
+  }
+  
+  @media (min-width: 700px) and (max-width: 1199px) {
+    .layout-responsive {
+      flex-direction: column;
+    }
+  }
+  
+  @media (max-width: 699px) {
+    .layout-responsive {
+      flex-direction: column;
+    }
+  }
+  
+  .main-layout-responsive {
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  @media (min-width: 1200px) {
+    .main-layout-responsive {
+      gap: 1.5rem;
+    }
+  }
+  
+  @media (min-width: 700px) and (max-width: 899px) {
+    .main-layout-responsive {
+      gap: 1rem;
+    }
+  }
+  
+  @media (max-width: 699px) {
+    .main-layout-responsive {
+      gap: 0.75rem;
+    }
+  }
+  
+  /* Tabs responsive selon spécifications exactes */
+  .tabs-responsive {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  @media (max-width: 699px) {
+    .tabs-responsive {
+      gap: 0.5rem;
+      overflow-x: auto;
+    }
+  }
+  
+  /* Search responsive selon spécifications exactes */
+  .search-responsive {
+    width: 100%;
+    max-width: 32rem;
+  }
+  
+  @media (max-width: 699px) {
+    .search-responsive {
+      max-width: 100%;
+    }
+  }
+  
+  /* Boutons responsive selon spécifications exactes */
+  .btn-responsive {
+    padding: 0.5rem 1.5rem;
+  }
+  
+  @media (max-width: 699px) {
+    .btn-responsive {
+      padding: 0.5rem 1rem;
+    }
+  }
+  
+  .btn-full-mobile {
+    width: 100%;
+  }
+  
+  @media (max-width: 699px) {
+    .btn-full-mobile {
+      width: 100%;
+    }
+  }
+}
+
+/* ZONE 19-25 : ANIMATIONS POUR NOUVEAUX COMPOSANTS */
+
+/* Animation pop-badge pour notifications */
+@keyframes pop-badge {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-pop-badge {
+  animation: pop-badge 180ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Animation scale-108 pour stepper et bottom nav */
+.scale-108 {
+  transform: scale(1.08);
+}
+
+/* Animation scale-110 pour icônes hover */
+.scale-110 {
+  transform: scale(1.1);
+}
+
+/* Animation fade-in pour charts */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fade-in 120ms ease-out;
+}
+
+/* Animation slide-down pour menus dropdown */
+@keyframes slide-down {
+  from { 
+    opacity: 0; 
+    transform: translateY(-8px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+.animate-slide-down {
+  animation: slide-down 120ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Animation shake pour erreurs */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+.animate-shake {
+  animation: shake 100ms ease-in-out 2;
+}
+
+/* Animation pulse pour loading states */
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 1.5s ease-in-out infinite;
+}
+
+/* Animation bounce pour micro-interactions */
+@keyframes bounce-soft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+.animate-bounce-soft {
+  animation: bounce-soft 200ms ease-in-out;
+}
+
+/* ZONE 38-42 : ANIMATIONS POUR COMPOSANTS AVANCÉS */
+
+/* Animation shimmer pour skeleton */
+@keyframes shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: calc(200px + 100%) 0; }
+}
+
+.animate-skeleton {
+  background: linear-gradient(90deg, #384356 25%, #4A5568 50%, #384356 75%);
+  background-size: 200px 100%;
+  animation: shimmer 1.2s infinite;
+}
+
+/* Animation toast-in */
+@keyframes toast-in {
+  from { 
+    opacity: 0; 
+    transform: translateY(40px) scale(0.95); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0) scale(1); 
+  }
+}
+
+.animate-toast-in {
+  animation: toast-in 140ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Animation menu-in pour context menu */
+@keyframes menu-in {
+  from { 
+    opacity: 0; 
+    transform: scale(0.97) translateY(10px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: scale(1) translateY(0); 
+  }
+}
+
+.animate-menu-in {
+  animation: menu-in 100ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Animation popover-in */
+@keyframes popover-in {
+  from { 
+    opacity: 0; 
+    transform: scale(0.98); 
+  }
+  to { 
+    opacity: 1; 
+    transform: scale(1.05); 
+  }
+}
+
+.animate-popover-in {
+  animation: popover-in 120ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* ZONE 87-95 : ANIMATIONS POUR COMPOSANTS VIDES */
+
+/* Animation fade-in pour empty states */
+@keyframes fade-in-empty {
+  from { 
+    opacity: 0; 
+    transform: translateY(10px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+.animate-fade-in-empty {
+  animation: fade-in-empty 120ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Animation slide-down pour topbar */
+@keyframes slide-down-topbar {
+  from { 
+    opacity: 0; 
+    transform: translateY(-10px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+.animate-slide-down-topbar {
+  animation: slide-down-topbar 120ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Animation pop-in pour widgets */
+@keyframes pop-in-widget {
+  from { 
+    opacity: 0; 
+    transform: scale(0.95); 
+  }
+  to { 
+    opacity: 1; 
+    transform: scale(1); 
+  }
+}
+
+.animate-pop-in-widget {
+  animation: pop-in-widget 100ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Animation shimmer pour skeleton grid */
+@keyframes shimmer-grid {
+  0% { background-position: -200px 0; }
+  100% { background-position: calc(200px + 100%) 0; }
+}
+
+.animate-skeleton-grid {
+  background: linear-gradient(90deg, #232B3E 25%, #384356 50%, #232B3E 75%);
+  background-size: 200px 100%;
+  animation: shimmer-grid 1.2s infinite;
+}
+
+/* Animation scale-in pour confirm popup */
+@keyframes scale-in-confirm {
+  from { 
+    opacity: 0; 
+    transform: scale(0.95) translateY(20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: scale(1) translateY(0); 
+  }
+}
+
+.animate-scale-in-confirm {
+  animation: scale-in-confirm 120ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Animation help-overlay */
+@keyframes help-overlay-in {
+  from { 
+    opacity: 0; 
+    transform: scale(0.95) translateY(20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: scale(1) translateY(0); 
+  }
+}
+
+.animate-help-overlay-in {
+  animation: help-overlay-in 120ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Animation user-menu */
+@keyframes user-menu-in {
+  from { 
+    opacity: 0; 
+    transform: scale(0.95) translateY(-10px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: scale(1) translateY(0); 
+  }
+}
+
+.animate-user-menu-in {
+  animation: user-menu-in 120ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* ZONE 96-105 : ANIMATIONS POUR PAGES FINALES */
+
+/* Animation login-page */
+@keyframes login-page-in {
+  from { 
+    opacity: 0; 
+    transform: scale(0.95) translateY(20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: scale(1) translateY(0); 
+  }
+}
+
+.animate-login-page-in {
+  animation: login-page-in 120ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Animation error-page */
+@keyframes error-page-bounce {
+  from { 
+    opacity: 0; 
+    transform: scale(0.8) translateY(20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: scale(1) translateY(0); 
+  }
+}
+
+.animate-error-page-bounce {
+  animation: error-page-bounce 120ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Animation settings-page */
+@keyframes settings-page-in {
+  from { 
+    opacity: 0; 
+    transform: translateX(20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateX(0); 
+  }
+}
+
+.animate-settings-page-in {
+  animation: settings-page-in 120ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Animation splash-page */
+@keyframes splash-logo-pulse {
+  0%, 100% { 
+    transform: scale(1); 
+  }
+  50% { 
+    transform: scale(1.05); 
+  }
+}
+
+.animate-splash-logo-pulse {
+  animation: splash-logo-pulse 2s ease-in-out infinite;
+}
+
+/* Animation tour-guide */
+@keyframes tour-guide-slide {
+  from { 
+    opacity: 0; 
+    transform: scale(0.95) translateY(20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: scale(1) translateY(0); 
+  }
+}
+
+.animate-tour-guide-slide {
+  animation: tour-guide-slide 120ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Animation language-menu */
+@keyframes language-menu-scale {
+  from { 
+    opacity: 0; 
+    transform: scale(0.95); 
+  }
+  to { 
+    opacity: 1; 
+    transform: scale(1); 
+  }
+}
+
+.animate-language-menu-scale {
+  animation: language-menu-scale 100ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Animation history-panel */
+@keyframes history-panel-slide {
+  from { 
+    transform: translateX(100%); 
+  }
+  to { 
+    transform: translateX(0); 
+  }
+}
+
+.animate-history-panel-slide {
+  animation: history-panel-slide 120ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Animation invite-panel */
+@keyframes invite-panel-in {
+  from { 
+    opacity: 0; 
+    transform: scale(0.95) translateY(20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: scale(1) translateY(0); 
+  }
+}
+
+.animate-invite-panel-in {
+  animation: invite-panel-in 120ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Animation theme-toggle */
+@keyframes theme-toggle-switch {
+  from { 
+    transform: translateX(0); 
+  }
+  to { 
+    transform: translateX(28px); 
+  }
+}
+
+.animate-theme-toggle-switch {
+  animation: theme-toggle-switch 120ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* ZONE 1 : SYSTÈME SOLAIRE - ANIMATIONS ULTRA PRÉCISES */
+
+/* Animation pulse principale selon cahier des charges */
+@keyframes main-bubble-pulse {
+  0%, 100% { 
+    transform: scale(1); 
+  }
+  50% { 
+    transform: scale(1.04); 
+  }
+}
+
+.animate-main-bubble-pulse {
+  animation: main-bubble-pulse 2.4s cubic-bezier(0.56, 0.04, 0.24, 1) infinite;
+}
+
+/* Animation glow pulse synchronisé */
+@keyframes glow-pulse {
+  0%, 100% { 
+    opacity: 0.24; 
+  }
+  50% { 
+    opacity: 0.26; 
+  }
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 2.4s cubic-bezier(0.56, 0.04, 0.24, 1) infinite;
+}
+
+/* Animation satellite micro-pulse */
+@keyframes satellite-pulse {
+  0%, 100% { 
+    transform: scale(1); 
+  }
+  50% { 
+    transform: scale(1.05); 
+  }
+}
+
+.animate-satellite-pulse {
+  animation: satellite-pulse 1.8s cubic-bezier(0.6, 0.14, 0.19, 1) infinite;
+}
+
+/* Animation rotation douce satellites */
+@keyframes satellite-rotation {
+  0% { 
+    transform: rotate(0deg); 
+  }
+  25% { 
+    transform: rotate(3deg); 
+  }
+  75% { 
+    transform: rotate(-3deg); 
+  }
+  100% { 
+    transform: rotate(0deg); 
+  }
+}
+
+.animate-satellite-rotation {
+  animation: satellite-rotation 2s ease-in-out infinite;
+}
+
+/* Animation trait de liaison */
+@keyframes line-draw {
+  from { 
+    stroke-dasharray: 1000; 
+    stroke-dashoffset: 1000; 
+  }
+  to { 
+    stroke-dasharray: 1000; 
+    stroke-dashoffset: 0; 
+  }
+}
+
+.animate-line-draw {
+  animation: line-draw 0.3s ease-out forwards;
+}
+
+/* Animation bouton + apparition */
+@keyframes button-appear {
+  from { 
+    transform: scale(0.6); 
+    opacity: 0; 
+  }
+  to { 
+    transform: scale(1); 
+    opacity: 1; 
+  }
+}
+
+.animate-button-appear {
+  animation: button-appear 0.09s ease-out forwards;
+}
+
+/* Animation panel slide-in */
+@keyframes panel-slide-in {
+  from { 
+    transform: translateX(100%); 
+  }
+  to { 
+    transform: translateX(0); 
+  }
+}
+
+.animate-panel-slide-in {
+  animation: panel-slide-in 0.16s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+/* Animation satellite apparition décalée */
+@keyframes satellite-appear {
+  from { 
+    transform: scale(0.5) translate(0, 0); 
+    opacity: 0; 
+  }
+  to { 
+    transform: scale(1) translate(var(--target-x), var(--target-y)); 
+    opacity: 1; 
+  }
+}
+
+.animate-satellite-appear {
+  animation: satellite-appear 0.2s ease-out forwards;
+}
+
+/* Focus ring personnalisé selon cahier des charges */
+.solar-system-focus {
+  outline: 2px solid #7DE3F4;
+  outline-offset: 2px;
+}
+
+/* Glow effects selon palette exacte */
+.glow-main-bubble {
+  box-shadow: 0 0 36px rgba(70, 184, 234, 0.4);
+}
+
+.glow-satellite {
+  box-shadow: 0 0 20px rgba(78, 226, 236, 0.15);
+}
+
+.glow-button {
+  box-shadow: 0 2px 12px rgba(70, 184, 234, 0.27);
+}
+
+.glow-line {
+  filter: drop-shadow(0 0 6px rgba(78, 226, 236, 0.6));
+}
+
+/* ZONE 2 : PANEL DÉTAILS - ANIMATIONS ULTRA PRÉCISES */
+
+/* Animation slide-in panel selon cahier des charges */
+@keyframes panel-slide-in-precise {
+  from { 
+    transform: translateX(56px); 
+    opacity: 0; 
+  }
+  to { 
+    transform: translateX(0); 
+    opacity: 1; 
+  }
+}
+
+.animate-panel-slide-in-precise {
+  animation: panel-slide-in-precise 180ms cubic-bezier(0.5, 0, 0.15, 1) forwards;
+}
+
+/* Animation stagger pour les éléments de liste */
+@keyframes stagger-fade-slide {
+  from { 
+    opacity: 0; 
+    transform: translateY(-8px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+.animate-stagger-fade-slide {
+  animation: stagger-fade-slide 36ms ease-out forwards;
+}
+
+/* Animation bouton scale + glow */
+@keyframes button-scale-glow {
+  from { 
+    transform: scale(1); 
+    box-shadow: none; 
+  }
+  to { 
+    transform: scale(1.05); 
+    box-shadow: 0 2px 8px rgba(70, 184, 234, 0.33); 
+  }
+}
+
+.animate-button-scale-glow {
+  animation: button-scale-glow 90ms ease-out forwards;
+}
+
+/* Animation input border */
+@keyframes input-border-expand {
+  from { 
+    border-width: 0; 
+  }
+  to { 
+    border-width: 2px; 
+  }
+}
+
+.animate-input-border-expand {
+  animation: input-border-expand 60ms ease-out forwards;
+}
+
+/* Animation menu contextuel pop + fade */
+@keyframes context-menu-pop {
+  from { 
+    transform: scale(0.9); 
+    opacity: 0; 
+  }
+  to { 
+    transform: scale(1); 
+    opacity: 1; 
+  }
+}
+
+.animate-context-menu-pop {
+  animation: context-menu-pop 80ms ease-out forwards;
+}
+
+/* Animation icône crayon hover */
+@keyframes pencil-fade-in {
+  from { 
+    opacity: 0; 
+    transform: scale(0.8); 
+  }
+  to { 
+    opacity: 1; 
+    transform: scale(1); 
+  }
+}
+
+.animate-pencil-fade-in {
+  animation: pencil-fade-in 120ms ease-out forwards;
+}
+
+/* Animation bouton close */
+@keyframes close-button-appear {
+  from { 
+    transform: scale(0.97); 
+    opacity: 0; 
+  }
+  to { 
+    transform: scale(1); 
+    opacity: 1; 
+  }
+}
+
+.animate-close-button-appear {
+  animation: close-button-appear 90ms ease-out forwards;
+}
+
+/* Animation empty state */
+@keyframes empty-state-fade-slide {
+  from { 
+    opacity: 0; 
+    transform: translateY(20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+.animate-empty-state-fade-slide {
+  animation: empty-state-fade-slide 140ms ease-out forwards;
+}
+
+/* Animation error/success states */
+@keyframes error-slide-in {
+  from { 
+    opacity: 0; 
+    transform: translateY(-10px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+.animate-error-slide-in {
+  animation: error-slide-in 120ms ease-out forwards;
+}
+
+/* Scroll natif personnalisé */
+.panel-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.panel-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.panel-scroll::-webkit-scrollbar-thumb {
+  background: #384356;
+  border-radius: 3px;
+}
+
+.panel-scroll::-webkit-scrollbar-thumb:hover {
+  background: #4A5568;
+}
+
+/* Focus ring personnalisé pour panel */
+.panel-focus {
+  outline: 2px solid #7DE3F4;
+  outline-offset: 2px;
+}
+
+/* Hover effects pour cards */
+.card-hover {
+  transition: all 90ms ease-out;
+}
+
+.card-hover:hover {
+  background-color: #232B3E;
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ZONE 11 : PRINT STYLES */
+@media print {
+  .sidebar,
+  .topbar,
+  button,
+  .notification-badge {
+    display: none !important;
+  }
+  
+  .main-content {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  .panel-card {
+    break-inside: avoid;
+  }
+}
