@@ -1,6 +1,6 @@
 import './App.css';
-import InteractiveNetworkGraph from './components/InteractiveNetworkGraph';
-import InfluenceRanking from './components/InfluenceRanking';
+import EmptyNetworkGraph3D from './components/NetworkGraph3D';
+import EmptyInfluenceRanking3D from './components/InfluenceRanking3D';
 
 function App() {
   return (
@@ -119,12 +119,12 @@ function App() {
                   <button className="hover:text-white transition-colors">−</button>
                 </div>
               </div>
-              <InteractiveNetworkGraph />
+              <EmptyNetworkGraph3D />
             </div>
 
             {/* Influence Ranking */}
             <div className="w-1/3 bg-gray-900/30 backdrop-blur-sm rounded-lg p-6 border border-gray-800">
-              <InfluenceRanking />
+              <EmptyInfluenceRanking3D />
             </div>
           </div>
         </main>
