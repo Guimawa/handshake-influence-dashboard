@@ -1,6 +1,6 @@
 import './App.css';
-import EmptyNetworkGraph3D from './components/NetworkGraph3D';
-import EmptyInfluenceRanking3D from './components/InfluenceRanking3D';
+import NetworkGraph3DExact from './components/NetworkGraph3DExact';
+import InfluenceRankingExact from './components/InfluenceRankingExact';
 
 function App() {
   return (
@@ -49,8 +49,8 @@ function App() {
           {/* Top Bar */}
           <header className="flex justify-between items-center mb-8">
             <div>
-              <h2 className="text-3xl font-bold">Sustainable Finance</h2>
-              <p className="text-gray-400 mt-1">Select Navigator</p>
+              <h2 className="text-3xl font-bold">United Nations Conference on Trade and Development (UNCTAD)</h2>
+              <p className="text-gray-400 mt-1">Topic: National Policy</p>
             </div>
             <div className="flex items-center space-x-6">
               <div className="flex items-center space-x-2">
@@ -119,12 +119,12 @@ function App() {
                   <button className="hover:text-white transition-colors">−</button>
                 </div>
               </div>
-              <EmptyNetworkGraph3D />
+              <NetworkGraph3DExact />
             </div>
 
             {/* Influence Ranking */}
             <div className="w-1/3 bg-gray-900/30 backdrop-blur-sm rounded-lg p-6 border border-gray-800">
-              <EmptyInfluenceRanking3D />
+              <InfluenceRankingExact />
             </div>
           </div>
         </main>
