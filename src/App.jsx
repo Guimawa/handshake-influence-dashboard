@@ -31,6 +31,10 @@ import Popover from './components/ui/Popover';
 import TooltipAvance from './components/ui/TooltipAvance';
 import DetailPanel from './components/ui/DetailPanel';
 import EdgePopover from './components/ui/EdgePopover';
+import ExportMenu from './components/ui/ExportMenu';
+import Onboarding from './components/ui/Onboarding';
+import KeyboardShortcuts from './components/ui/KeyboardShortcuts';
+import FiltersPanel from './components/ui/FiltersPanel';
 
 function DashboardContent() {
   const layoutState = useLayoutObserver();
@@ -62,6 +66,33 @@ function DashboardContent() {
     { content: 'Événement 1 - Configuration initiale' },
     { content: 'Événement 2 - Chargement des données' },
     { content: 'Événement 3 - Finalisation du processus' }
+  ]);
+  const [showExportMenu, setShowExportMenu] = useState(false);
+  const [showOnboarding, setShowOnboarding] = useState(false);
+  const [showKeyboardShortcuts, setShowKeyboardShortcuts] = useState(false);
+  const [showFiltersPanel, setShowFiltersPanel] = useState(false);
+  const [onboardingSteps] = useState([
+    {
+      title: 'Bienvenue !',
+      description: 'Découvrez les fonctionnalités principales du dashboard.',
+      targetElement: '.main-content',
+      targetPosition: { x: '50%', y: '50%' },
+      targetSize: { width: '300px', height: '200px' }
+    },
+    {
+      title: 'Graphique réseau',
+      description: 'Cliquez ici pour interagir avec le graphique principal.',
+      targetElement: '.network-graph',
+      targetPosition: { x: '50%', y: '50%' },
+      targetSize: { width: '400px', height: '300px' }
+    },
+    {
+      title: 'Panel de contrôle',
+      description: 'Utilisez ce panel pour configurer vos paramètres.',
+      targetElement: '.ranking-panel',
+      targetPosition: { x: '50%', y: '50%' },
+      targetSize: { width: '300px', height: '400px' }
+    }
   ]);
 
   // PHASE 5 - UX Fine Tuning
@@ -322,6 +353,50 @@ function DashboardContent() {
                     Ouvrir panel
                   </button>
                 </div>
+                
+                {/* Zone 45 - Export Menu */}
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold text-[#F1F5F9] mb-4">Export/Partage</h3>
+                  <button 
+                    onClick={() => setShowExportMenu(true)}
+                    className="px-4 py-2 bg-[#8B5CF6] text-white rounded-lg hover:bg-[#7c3aed] transition"
+                  >
+                    Exporter/Partager
+                  </button>
+                </div>
+                
+                {/* Zone 46 - Onboarding */}
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold text-[#F1F5F9] mb-4">Guide d'utilisation</h3>
+                  <button 
+                    onClick={() => setShowOnboarding(true)}
+                    className="px-4 py-2 bg-[#06B6D4] text-white rounded-lg hover:bg-[#0891b2] transition"
+                  >
+                    Démarrer l'onboarding
+                  </button>
+                </div>
+                
+                {/* Zone 47 - Raccourcis clavier */}
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold text-[#F1F5F9] mb-4">Aide</h3>
+                  <button 
+                    onClick={() => setShowKeyboardShortcuts(true)}
+                    className="px-4 py-2 bg-[#F59E0B] text-white rounded-lg hover:bg-[#d97706] transition"
+                  >
+                    Raccourcis clavier
+                  </button>
+                </div>
+                
+                {/* Zone 48 - Filtres */}
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold text-[#F1F5F9] mb-4">Filtres</h3>
+                  <button 
+                    onClick={() => setShowFiltersPanel(true)}
+                    className="px-4 py-2 bg-[#10B981] text-white rounded-lg hover:bg-[#059669] transition"
+                  >
+                    Ouvrir filtres
+                  </button>
+                </div>
               </div>
             </RankingPanel>
           </div>
@@ -425,6 +500,36 @@ function DashboardContent() {
           </div>
         </div>
       </DetailPanel>
+      
+      {/* Zone 45 - Export Menu */}
+      <ExportMenu 
+        isOpen={showExportMenu}
+        onClose={() => setShowExportMenu(false)}
+        onExport={(type) => {
+          console.log('Export type:', type);
+          setShowToast(true);
+        }}
+      />
+      
+      {/* Zone 46 - Onboarding */}
+      <Onboarding 
+        isOpen={showOnboarding}
+        onClose={() => setShowOnboarding(false)}
+        steps={onboardingSteps}
+      />
+      
+      {/* Zone 47 - Keyboard Shortcuts */}
+      <KeyboardShortcuts 
+        isOpen={showKeyboardShortcuts}
+        onClose={() => setShowKeyboardShortcuts(false)}
+      />
+      
+      {/* Zone 48 - Filters Panel */}
+      <FiltersPanel 
+        isOpen={showFiltersPanel}
+        onClose={() => setShowFiltersPanel(false)}
+        onFiltersChange={(filters) => console.log('Filters changed:', filters)}
+      />
     </div>
   );
 }

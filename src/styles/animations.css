@@ -345,6 +345,77 @@
   transform: scale(1.03);
 }
 
+/* Animations pour les composants zones 46-60 */
+
+/* Export menu animation */
+@keyframes export-menu-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-export-menu-in {
+  animation: export-menu-in 100ms cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+/* Help overlay animation */
+@keyframes help-overlay-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-help-overlay-in {
+  animation: help-overlay-in 200ms cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+/* Filter badge animation */
+@keyframes filter-badge-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-filter-badge-in {
+  animation: filter-badge-in 150ms cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+/* Slider styles */
+.slider::-webkit-slider-thumb {
+  appearance: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: #3B82F6;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.slider::-moz-range-thumb {
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: #3B82F6;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
 @keyframes wakeUpPulse {
   0% { 
     opacity: 0.7; 
