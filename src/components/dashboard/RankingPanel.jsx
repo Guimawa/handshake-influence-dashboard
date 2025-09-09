@@ -1,31 +1,28 @@
 import React from 'react';
 
 /**
- * ZONE 4 - RANKING PANEL COMPOSANT MODULAIRE
- * Structure vide, prête pour modules futurs
+ * Composant RankingPanel modulaire
+ * Zone 4 - PANEL DROIT selon spécifications
  */
 
 const RankingPanel = ({ 
-  className = '',
+  title = "Ranking",
   children,
-  ...props 
+  className = ""
 }) => {
   return (
     <aside 
       className={`w-[380px] flex flex-col gap-6 ${className}`} 
       role="complementary" 
       aria-label="Zone latérale"
-      {...props}
     >
       <div 
-        className="panel bg-panel rounded-xl p-8 min-h-[240px] flex flex-col items-center justify-center"
+        className="panel bg-[#232B3E] rounded-xl p-8 min-h-[240px] flex flex-col items-center justify-center"
         tabIndex="0"
         aria-label="Ranking card vide, slot à remplir plus tard"
       >
         {children || '[Ranking card vide, slot à remplir plus tard]'}
       </div>
-      
-      {/* D'autres panels peuvent être ajoutés ici */}
     </aside>
   );
 };
