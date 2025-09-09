@@ -15,6 +15,8 @@ import RankingPanel from './components/dashboard/RankingPanel';
 import NotificationMenu from './components/ui/NotificationMenu';
 import NetworkGraph from './components/dashboard/NetworkGraph';
 import BottomNavigation from './components/mobile/BottomNavigation';
+import TagInput from './components/ui/TagInput';
+import Stepper from './components/ui/Stepper';
 
 function DashboardContent() {
   const layoutState = useLayoutObserver();
@@ -28,6 +30,12 @@ function DashboardContent() {
   const [notifications] = useState([
     { id: 1, title: 'Nouveau projet', message: 'Un nouveau projet a été créé', time: '2 min', read: false },
     { id: 2, title: 'Mise à jour', message: 'Système mis à jour', time: '1h', read: false }
+  ]);
+  const [tags, setTags] = useState(['React', 'Dashboard']);
+  const [stepperSteps] = useState([
+    { id: 1, title: 'Configuration' },
+    { id: 2, title: 'Données' },
+    { id: 3, title: 'Finalisation' }
   ]);
 
   // PHASE 5 - UX Fine Tuning
@@ -122,8 +130,30 @@ function DashboardContent() {
             
             {/* ZONE 4 - PANEL DROIT */}
             <RankingPanel>
-              <div className="text-center text-[#AAB7C6]">
-                Ranking Panel - À implémenter
+              <div className="space-y-6">
+                <div className="text-center text-[#AAB7C6] mb-6">
+                  Ranking Panel - À implémenter
+                </div>
+                
+                {/* Zone 21 - Stepper */}
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold text-[#F1F5F9] mb-4">Progression</h3>
+                  <Stepper 
+                    steps={stepperSteps}
+                    currentStep={1}
+                    onStepClick={(index) => console.log('Step clicked:', index)}
+                  />
+                </div>
+                
+                {/* Zone 29 - TagInput */}
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold text-[#F1F5F9] mb-4">Tags</h3>
+                  <TagInput 
+                    tags={tags}
+                    onTagsChange={setTags}
+                    placeholder="Ajouter un tag"
+                  />
+                </div>
               </div>
             </RankingPanel>
           </div>
