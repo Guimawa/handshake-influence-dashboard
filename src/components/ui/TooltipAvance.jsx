@@ -1,12 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 
 /**
- * Composant Tooltip
- * Zone 36 - TOOLTIP selon spécifications exactes du fichier de référence
- * Ligne 6995 du fichier chat gpt dash v2 0.1.txt
+ * Composant TooltipAvance
+ * Zone 43 - TOOLTIP AVANCÉ selon spécifications exactes du fichier de référence
+ * Ligne 8394 du fichier chat gpt dash v2 0.1.txt
  */
 
-const Tooltip = ({ 
+const TooltipAvance = ({ 
   content,
   children,
   position = "top",
@@ -82,6 +82,8 @@ const Tooltip = ({
     };
   }, []);
 
+  const tooltipId = `tooltip-avance-${Math.random().toString(36).substr(2, 9)}`;
+
   return (
     <>
       <div
@@ -91,6 +93,7 @@ const Tooltip = ({
         onFocus={showTooltip}
         onBlur={hideTooltip}
         className="inline-block"
+        aria-describedby={isVisible ? tooltipId : undefined}
       >
         {children}
       </div>
@@ -104,13 +107,16 @@ const Tooltip = ({
             left: `${tooltipPosition.left}px`,
           }}
           role="tooltip"
-          id={`tooltip-${Math.random().toString(36).substr(2, 9)}`}
+          id={tooltipId}
         >
-          <span className="text-white font-semibold">{content}</span>
+          <span className="text-white font-semibold">{content.title || content}</span>
+          {content.description && (
+            <p className="text-[#AAB7C6] text-sm mt-2">{content.description}</p>
+          )}
         </div>
       )}
     </>
   );
 };
 
-export default Tooltip;
+export default TooltipAvance;

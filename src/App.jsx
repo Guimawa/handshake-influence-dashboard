@@ -17,6 +17,20 @@ import NetworkGraph from './components/dashboard/NetworkGraph';
 import BottomNavigation from './components/mobile/BottomNavigation';
 import TagInput from './components/ui/TagInput';
 import Stepper from './components/ui/Stepper';
+import Switch from './components/ui/Switch';
+import Pagination from './components/ui/PaginationComponent';
+import EmptyState from './components/ui/EmptyState';
+import ProgressBar from './components/ui/ProgressBar';
+import Timeline from './components/ui/Timeline';
+import Tooltip from './components/ui/Tooltip';
+import Badge from './components/ui/Badge';
+import AdvancedModal from './components/ui/AdvancedModal';
+import SkeletonLoader from './components/ui/SkeletonLoader';
+import ContextMenu from './components/ui/ContextMenu';
+import Popover from './components/ui/Popover';
+import TooltipAvance from './components/ui/TooltipAvance';
+import DetailPanel from './components/ui/DetailPanel';
+import EdgePopover from './components/ui/EdgePopover';
 
 function DashboardContent() {
   const layoutState = useLayoutObserver();
@@ -36,6 +50,18 @@ function DashboardContent() {
     { id: 1, title: 'Configuration' },
     { id: 2, title: 'Données' },
     { id: 3, title: 'Finalisation' }
+  ]);
+  const [switchState, setSwitchState] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [showModal, setShowModal] = useState(false);
+  const [showToast, setShowToast] = useState(false);
+  const [showDetailPanel, setShowDetailPanel] = useState(false);
+  const [showContextMenu, setShowContextMenu] = useState(false);
+  const [contextMenuPosition, setContextMenuPosition] = useState({ x: 0, y: 0 });
+  const [timelineItems] = useState([
+    { content: 'Événement 1 - Configuration initiale' },
+    { content: 'Événement 2 - Chargement des données' },
+    { content: 'Événement 3 - Finalisation du processus' }
   ]);
 
   // PHASE 5 - UX Fine Tuning
@@ -154,6 +180,148 @@ function DashboardContent() {
                     placeholder="Ajouter un tag"
                   />
                 </div>
+                
+                {/* Zone 31 - Switch */}
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold text-[#F1F5F9] mb-4">Paramètres</h3>
+                  <Switch 
+                    checked={switchState}
+                    onChange={setSwitchState}
+                    label="Activer les notifications"
+                  />
+                </div>
+                
+                {/* Zone 32 - Pagination */}
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold text-[#F1F5F9] mb-4">Navigation</h3>
+                  <Pagination 
+                    currentPage={currentPage}
+                    totalPages={5}
+                    onPageChange={setCurrentPage}
+                  />
+                </div>
+                
+                {/* Zone 33 - Empty State */}
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold text-[#F1F5F9] mb-4">État vide</h3>
+                  <EmptyState 
+                    title="Aucune donnée"
+                    description="Essayez de modifier vos filtres ou d'ajouter un élément."
+                    actionLabel="Créer un élément"
+                    onAction={() => setShowToast(true)}
+                  />
+                </div>
+                
+                {/* Zone 34 - Progress Bar */}
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold text-[#F1F5F9] mb-4">Progression</h3>
+                  <ProgressBar 
+                    value={66}
+                    max={100}
+                    showPercentage={true}
+                  />
+                </div>
+                
+                {/* Zone 35 - Timeline */}
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold text-[#F1F5F9] mb-4">Chronologie</h3>
+                  <Timeline 
+                    items={timelineItems}
+                    emptyMessage="Aucun événement à afficher"
+                  />
+                </div>
+                
+                {/* Zone 36 - Tooltip */}
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold text-[#F1F5F9] mb-4">Tooltips</h3>
+                  <div className="flex gap-4">
+                    <Tooltip content="Ceci est un tooltip d'information">
+                      <button className="px-4 py-2 bg-[#3B82F6] text-white rounded-lg">
+                        Hover me
+                      </button>
+                    </Tooltip>
+                    <TooltipAvance content={{ title: "Tooltip avancé", description: "Description détaillée" }}>
+                      <button className="px-4 py-2 bg-[#22C55E] text-white rounded-lg">
+                        Tooltip avancé
+                      </button>
+                    </TooltipAvance>
+                  </div>
+                </div>
+                
+                {/* Zone 37 - Badge */}
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold text-[#F1F5F9] mb-4">Badges</h3>
+                  <div className="flex gap-2 flex-wrap">
+                    <Badge variant="success">Actif</Badge>
+                    <Badge variant="error">Erreur</Badge>
+                    <Badge variant="warning">Attention</Badge>
+                    <Badge variant="info">Information</Badge>
+                  </div>
+                </div>
+                
+                {/* Zone 38 - Advanced Modal */}
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold text-[#F1F5F9] mb-4">Modale avancée</h3>
+                  <button 
+                    onClick={() => setShowModal(true)}
+                    className="px-4 py-2 bg-[#3B82F6] text-white rounded-lg hover:bg-[#2563eb] transition"
+                  >
+                    Ouvrir modale
+                  </button>
+                </div>
+                
+                {/* Zone 39 - Toast */}
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold text-[#F1F5F9] mb-4">Notifications</h3>
+                  <button 
+                    onClick={() => setShowToast(true)}
+                    className="px-4 py-2 bg-[#22C55E] text-white rounded-lg hover:bg-[#16a34a] transition"
+                  >
+                    Afficher toast
+                  </button>
+                </div>
+                
+                {/* Zone 40 - Skeleton Loader */}
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold text-[#F1F5F9] mb-4">Chargement</h3>
+                  <SkeletonLoader lines={4} />
+                </div>
+                
+                {/* Zone 41 - Context Menu */}
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold text-[#F1F5F9] mb-4">Menu contextuel</h3>
+                  <button 
+                    onContextMenu={(e) => {
+                      e.preventDefault();
+                      setContextMenuPosition({ x: e.clientX, y: e.clientY });
+                      setShowContextMenu(true);
+                    }}
+                    className="px-4 py-2 bg-[#F59E0B] text-white rounded-lg hover:bg-[#d97706] transition"
+                  >
+                    Clic droit ici
+                  </button>
+                </div>
+                
+                {/* Zone 42 - Popover */}
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold text-[#F1F5F9] mb-4">Popover</h3>
+                  <Popover content={{ title: "Titre du popover", description: "Description détaillée du popover" }}>
+                    <button className="px-4 py-2 bg-[#8B5CF6] text-white rounded-lg">
+                      Hover pour popover
+                    </button>
+                  </Popover>
+                </div>
+                
+                {/* Zone 44 - Detail Panel */}
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold text-[#F1F5F9] mb-4">Panel de détail</h3>
+                  <button 
+                    onClick={() => setShowDetailPanel(true)}
+                    className="px-4 py-2 bg-[#EF4444] text-white rounded-lg hover:bg-[#dc2626] transition"
+                  >
+                    Ouvrir panel
+                  </button>
+                </div>
               </div>
             </RankingPanel>
           </div>
@@ -187,6 +355,76 @@ function DashboardContent() {
       {/* Live Region pour l'accessibilité */}
       <LiveRegion type="polite" />
       <LiveRegion type="assertive" />
+      
+      {/* Modales et composants overlay */}
+      <AdvancedModal 
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        title="Modale avancée"
+      >
+        <h3 className="text-lg font-semibold text-[#F1F5F9] mb-4">Contenu de la modale</h3>
+        <p className="text-[#AAB7C6] mb-6">Ceci est un exemple de modale avancée avec toutes les spécifications du fichier de référence.</p>
+        <div className="flex gap-2 justify-end">
+          <button 
+            onClick={() => setShowModal(false)}
+            className="px-4 py-2 rounded-xl bg-[#222C3B] text-[#AAB7C6] hover:bg-[#3B82F6] hover:text-white transition"
+          >
+            Annuler
+          </button>
+          <button 
+            onClick={() => {
+              setShowModal(false);
+              setShowToast(true);
+            }}
+            className="px-4 py-2 rounded-xl bg-[#3B82F6] text-white font-semibold hover:bg-[#2563eb] transition"
+          >
+            Continuer
+          </button>
+        </div>
+      </AdvancedModal>
+      
+      {showToast && (
+        <Toast 
+          message="Action réussie !"
+          type="success"
+          duration={3000}
+          onClose={() => setShowToast(false)}
+        />
+      )}
+      
+      <ContextMenu 
+        isOpen={showContextMenu}
+        onClose={() => setShowContextMenu(false)}
+        position={contextMenuPosition}
+        items={[
+          { label: 'Renommer', onClick: () => console.log('Renommer') },
+          { label: 'Supprimer', onClick: () => console.log('Supprimer'), danger: true }
+        ]}
+      />
+      
+      <DetailPanel 
+        isOpen={showDetailPanel}
+        onClose={() => setShowDetailPanel(false)}
+        title="Détails de l'élément"
+      >
+        <div className="space-y-4">
+          <div>
+            <h4 className="text-[#F1F5F9] font-semibold mb-2">Informations</h4>
+            <p className="text-[#AAB7C6]">Ceci est un panel de détail avec toutes les spécifications du fichier de référence.</p>
+          </div>
+          <div>
+            <h4 className="text-[#F1F5F9] font-semibold mb-2">Actions</h4>
+            <div className="flex gap-2">
+              <button className="px-3 py-1 bg-[#3B82F6] text-white rounded-lg text-sm">
+                Éditer
+              </button>
+              <button className="px-3 py-1 bg-[#EF4444] text-white rounded-lg text-sm">
+                Supprimer
+              </button>
+            </div>
+          </div>
+        </div>
+      </DetailPanel>
     </div>
   );
 }

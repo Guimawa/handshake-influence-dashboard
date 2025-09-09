@@ -1,29 +1,44 @@
-"use client"
+import React from 'react';
 
-import * as React from "react"
-import * as SwitchPrimitive from "@radix-ui/react-switch"
+/**
+ * Composant Switch
+ * Zone 31 - SWITCH / TOGGLE ATOMIQUE selon spécifications exactes du fichier de référence
+ * Ligne 6819 du fichier chat gpt dash v2 0.1.txt
+ */
 
-import { cn } from "@/lib/utils"
+const Switch = ({ 
+  checked = false,
+  onChange,
+  label = "Label toggle",
+  disabled = false,
+  className = ""
+}) => {
+  const handleChange = (e) => {
+    if (!disabled && onChange) {
+      onChange(e.target.checked);
+    }
+  };
 
-function Switch({
-  className,
-  ...props
-}) {
   return (
-    <SwitchPrimitive.Root
-      data-slot="switch"
-      className={cn(
-        "peer data-[state=checked]:bg-primary data-[state=unchecked]:bg-input focus-visible:border-ring focus-visible:ring-ring/50 dark:data-[state=unchecked]:bg-input/80 inline-flex h-[1.15rem] w-8 shrink-0 items-center rounded-full border border-transparent shadow-xs transition-all outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50",
-        className
-      )}
-      {...props}>
-      <SwitchPrimitive.Thumb
-        data-slot="switch-thumb"
-        className={cn(
-          "bg-background dark:data-[state=unchecked]:bg-foreground dark:data-[state=checked]:bg-primary-foreground pointer-events-none block size-4 rounded-full ring-0 transition-transform data-[state=checked]:translate-x-[calc(100%-2px)] data-[state=unchecked]:translate-x-0"
-        )} />
-    </SwitchPrimitive.Root>
+    <label className={`inline-flex items-center cursor-pointer gap-3 select-none ${disabled ? 'opacity-50 cursor-not-allowed' : ''} ${className}`}>
+      <span className="text-[#AAB7C6] text-base font-semibold">{label}</span>
+      <input 
+        type="checkbox" 
+        className="sr-only peer" 
+        aria-label="Activer/désactiver"
+        checked={checked}
+        onChange={handleChange}
+        disabled={disabled}
+      />
+      <span
+        className={`w-10 h-6 bg-[#222C3B] rounded-full relative transition-all duration-120
+                   after:content-[''] after:absolute after:top-1 after:left-1 after:bg-white after:rounded-full after:w-4 after:h-4 after:shadow
+                   peer-checked:bg-[#3B82F6] peer-focus-visible:ring-2 peer-focus-visible:ring-[#3B82F6]
+                   peer-checked:after:translate-x-4 after:transition-all after:duration-120`}
+        aria-hidden="true"
+      ></span>
+    </label>
   );
-}
+};
 
-export { Switch }
+export default Switch;
