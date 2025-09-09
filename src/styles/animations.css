@@ -1,0 +1,552 @@
+/* PHASE 1 - INITIALISATION INVISIBLE */
+/* Variables CSS générées à la volée pour delays, durations, easings */
+:root {
+  --color-primary: #2563eb;
+  --color-accent: #36a2f8;
+  --color-success: #10b981;
+  --color-error: #ef4444;
+  --color-warning: #f59e0b;
+  --color-info: #3b82f6;
+  
+  --radius-card: 1.25rem;
+  --radius-button: 0.75rem;
+  --radius-input: 0.5rem;
+  
+  --shadow-card: 0 4px 20px rgba(36, 145, 255, 0.1);
+  --shadow-button: 0 2px 8px rgba(36, 145, 255, 0.2);
+  --shadow-modal: 0 20px 40px rgba(0, 0, 0, 0.3);
+  
+  --transition-fade: cubic-bezier(0.23, 1, 0.32, 1) 120ms;
+  --transition-scale: cubic-bezier(0.36, 0.66, 0.04, 1) 80ms;
+  --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55) 150ms;
+  --transition-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275) 200ms;
+  
+  /* Stagger delays calculés selon position spatiale */
+  --delay-sidebar-1: 10ms;
+  --delay-sidebar-2: 22ms;
+  --delay-sidebar-3: 34ms;
+  --delay-sidebar-4: 46ms;
+  --delay-sidebar-5: 58ms;
+  --delay-sidebar-6: 70ms;
+  --delay-sidebar-7: 82ms;
+  --delay-sidebar-8: 94ms;
+  
+  --delay-topbar-1: 15ms;
+  --delay-topbar-2: 23ms;
+  --delay-topbar-3: 31ms;
+  --delay-topbar-4: 39ms;
+  
+  --delay-cards-1: 70ms;
+  --delay-cards-2: 85ms;
+  --delay-cards-3: 100ms;
+  --delay-cards-4: 115ms;
+  
+  /* Layout observer variables */
+  --device-pixel-ratio: 1;
+  --text-scale: 1;
+  --density-scale: 1;
+}
+
+/* Pré-montage du DOM - tous les composants invisibles initialement */
+.dashboard-initialization {
+  display: none;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.dashboard-ready {
+  display: block;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Keyframes pour animations */
+@keyframes buttonPulse {
+  0% { 
+    box-shadow: 0 2px 8px var(--color-accent);
+    transform: scale(1);
+  }
+  60% { 
+    box-shadow: 0 6px 20px var(--color-accent);
+    transform: scale(1.02);
+  }
+  100% { 
+    box-shadow: 0 2px 8px var(--color-accent);
+    transform: scale(1);
+  }
+}
+
+@keyframes ripple {
+  from { 
+    transform: scale(0.8); 
+    opacity: 0.4; 
+  }
+  to { 
+    transform: scale(2.2); 
+    opacity: 0; 
+  }
+}
+
+@keyframes shakeX {
+  0% { transform: translateX(0); }
+  30% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+  70% { transform: translateX(-2px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes logoFadeIn {
+  0% { 
+    opacity: 0; 
+    transform: scale(0.9);
+  }
+  50% { 
+    opacity: 1; 
+    transform: scale(1.05);
+  }
+  100% { 
+    opacity: 1; 
+    transform: scale(1);
+  }
+}
+
+@keyframes iconSlideUp {
+  0% { 
+    opacity: 0; 
+    transform: translateY(-8px);
+  }
+  100% { 
+    opacity: 1; 
+    transform: translateY(0);
+  }
+}
+
+@keyframes topbarFadeIn {
+  0% { 
+    opacity: 0; 
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  }
+  100% { 
+    opacity: 1; 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+}
+
+@keyframes cardSpring {
+  0% { 
+    opacity: 0; 
+    transform: scale(0.94);
+  }
+  50% { 
+    opacity: 1; 
+    transform: scale(1.03);
+  }
+  100% { 
+    opacity: 1; 
+    transform: scale(1);
+  }
+}
+
+@keyframes cardSpring2 {
+  0% { 
+    opacity: 0; 
+    transform: scale(0.93);
+  }
+  50% { 
+    opacity: 1; 
+    transform: scale(1.05);
+  }
+  100% { 
+    opacity: 1; 
+    transform: scale(1);
+  }
+}
+
+@keyframes cardSpring3 {
+  0% { 
+    opacity: 0; 
+    transform: scale(0.91);
+  }
+  50% { 
+    opacity: 1; 
+    transform: scale(1.04);
+  }
+  100% { 
+    opacity: 1; 
+    transform: scale(1);
+  }
+}
+
+@keyframes avatarBounce {
+  0% { 
+    transform: scale(1); 
+  }
+  50% { 
+    transform: scale(1.14); 
+  }
+  100% { 
+    transform: scale(1); 
+  }
+}
+
+@keyframes scanline {
+  0% { 
+    transform: translateX(-100%); 
+    opacity: 0;
+  }
+  50% { 
+    opacity: 1;
+  }
+  100% { 
+    transform: translateX(100%); 
+    opacity: 0;
+  }
+}
+
+@keyframes glow {
+  0% { 
+    filter: drop-shadow(0 0 0 var(--color-accent));
+  }
+  100% { 
+    filter: drop-shadow(0 0 6px var(--color-accent));
+  }
+}
+
+@keyframes badgePulse {
+  0% { 
+    transform: scale(1); 
+  }
+  50% { 
+    transform: scale(1.13); 
+  }
+  100% { 
+    transform: scale(1); 
+  }
+}
+
+@keyframes modalSlideDown {
+  0% { 
+    transform: translateY(-40px); 
+    opacity: 0;
+  }
+  100% { 
+    transform: translateY(0); 
+    opacity: 1;
+  }
+}
+
+@keyframes toastSlideUp {
+  0% { 
+    transform: translateY(40px); 
+    opacity: 0;
+  }
+  100% { 
+    transform: translateY(0); 
+    opacity: 1;
+  }
+}
+
+@keyframes wakeUpPulse {
+  0% { 
+    opacity: 0.7; 
+    transform: scale(0.98);
+  }
+  50% { 
+    opacity: 1; 
+    transform: scale(1.02);
+  }
+  100% { 
+    opacity: 1; 
+    transform: scale(1);
+  }
+}
+
+/* Classes d'animation pour les composants */
+.animate-logo-fade-in {
+  animation: logoFadeIn 200ms var(--transition-bounce);
+}
+
+.animate-icon-slide-up {
+  animation: iconSlideUp 150ms var(--transition-fade);
+}
+
+.animate-topbar-fade-in {
+  animation: topbarFadeIn 30ms var(--transition-fade);
+}
+
+.animate-card-spring-1 {
+  animation: cardSpring 200ms var(--transition-spring);
+}
+
+.animate-card-spring-2 {
+  animation: cardSpring2 200ms var(--transition-spring);
+}
+
+.animate-card-spring-3 {
+  animation: cardSpring3 200ms var(--transition-spring);
+}
+
+.animate-avatar-bounce {
+  animation: avatarBounce 300ms var(--transition-bounce);
+}
+
+.animate-scanline {
+  animation: scanline 400ms ease-in-out;
+}
+
+.animate-glow {
+  animation: glow 200ms ease-out;
+}
+
+.animate-badge-pulse {
+  animation: badgePulse 2000ms ease-in-out infinite;
+}
+
+.animate-modal-slide-down {
+  animation: modalSlideDown 120ms var(--transition-fade);
+}
+
+.animate-toast-slide-up {
+  animation: toastSlideUp 60ms var(--transition-fade);
+}
+
+.animate-wake-up-pulse {
+  animation: wakeUpPulse 300ms var(--transition-bounce);
+}
+
+/* Pré-calcul des gradients et box-shadows pour éviter les flashs */
+.gradient-preload {
+  background: linear-gradient(135deg, #181E29 0%, #232B3E 100%);
+  box-shadow: var(--shadow-card);
+}
+
+/* Scrollbar custom */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 12px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(59, 130, 246, 0.3);
+  border-radius: 6px;
+  transition: width 200ms ease, opacity 500ms ease;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(59, 130, 246, 0.5);
+  width: 16px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:active {
+  background: rgba(59, 130, 246, 0.7);
+}
+
+/* Idle mode */
+.idle-mode {
+  opacity: 0.6;
+  filter: blur(1px);
+  transition: opacity 300ms ease, filter 300ms ease;
+}
+
+.idle-mode * {
+  animation-play-state: paused;
+}
+
+/* PHASE 4 - Actions/Modales - Animations supplémentaires */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+  20%, 40%, 60%, 80% { transform: translateX(2px); }
+}
+
+.animate-shake {
+  animation: shake 0.6s cubic-bezier(0.36, 0, 0.66, -0.56);
+}
+
+/* Button ripple effect */
+.btn-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-ripple::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn-ripple:active::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Form field stagger animation */
+@keyframes fieldStagger {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-field-stagger {
+  animation: fieldStagger 0.3s ease-out forwards;
+}
+
+/* Toast container positioning */
+.toast-container {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Modal backdrop blur */
+.modal-backdrop {
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* ZONE 6 - Topbar animations */
+@keyframes pop-badge {
+  0% { transform: scale(0.8); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.animate-pop-badge {
+  animation: pop-badge 180ms ease-out;
+}
+
+/* ZONE 9 - Mobile Drawer animations */
+@keyframes drawer-slide-in {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-drawer-slide-in {
+  animation: drawer-slide-in 180ms cubic-bezier(0.42, 0, 0.58, 1);
+}
+
+.animate-fade-in {
+  animation: fade-in 120ms ease-out;
+}
+
+/* ZONE 10 - Focus/Accessibilité - Focus rings exacts */
+.focus-ring {
+  @apply focus-visible:ring-2 focus-visible:ring-[#3B82F6] focus-visible:ring-offset-2 focus-visible:ring-offset-[#232B3E];
+}
+
+/* Focus rings pour tous les éléments interactifs */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: none;
+  ring: 2px;
+  ring-color: #3B82F6;
+  ring-offset: 2px;
+  ring-offset-color: #232B3E;
+}
+
+/* Focus rings spécifiques par zone */
+.sidebar button:focus-visible {
+  ring-offset-color: #232B3E;
+}
+
+.topbar button:focus-visible {
+  ring-offset-color: #232B3E;
+}
+
+.panel:focus-visible {
+  ring-offset-color: #181E29;
+}
+
+/* Navigation clavier améliorée */
+.keyboard-navigation button:focus-visible,
+.keyboard-navigation input:focus-visible {
+  transform: scale(1.02);
+  transition: transform 120ms ease-out;
+}
+
+/* Contraste AA respecté */
+.text-accessible {
+  color: #F1F5F9; /* Contraste 4.5:1 sur #181E29 */
+}
+
+.text-muted-accessible {
+  color: #AAB7C6; /* Contraste 3:1 sur #181E29 */
+}
+
+/* ZONE 3 - Main Content animations */
+.tab {
+  position: relative;
+  overflow: hidden;
+}
+
+.tab::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+.tab:hover::before {
+  transform: translateX(100%);
+}
+
+/* Animation de glissement pour les tabs */
+.tab-slide {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Focus ring animé pour search */
+.search-bar:focus-within {
+  animation: searchFocus 0.2s ease-out;
+}
+
+@keyframes searchFocus {
+  0% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.4);
+  }
+}

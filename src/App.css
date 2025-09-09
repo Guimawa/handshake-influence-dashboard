@@ -118,3 +118,143 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* ZONE 1 - SIDEBAR RESPONSIVE */
+@media (max-width: 900px) {
+  .sidebar {
+    width: 56px !important;
+  }
+  
+  .sidebar .label {
+    display: none;
+  }
+  
+  .sidebar .nav-item {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+@media (max-width: 600px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    z-index: 50;
+    transition: left 0.3s ease-in-out;
+  }
+  
+  .sidebar.open {
+    left: 0;
+  }
+  
+  .sidebar::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+  }
+}
+
+/* ZONE 2 - TOPBAR RESPONSIVE */
+@media (max-width: 700px) {
+  .topbar {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+/* ZONE 3 - MAIN CONTENT RESPONSIVE */
+@media (max-width: 700px) {
+  .main-content {
+    padding: 16px;
+  }
+  
+  .panel {
+    padding: 16px;
+  }
+}
+
+/* ZONE 4 - PANEL DROIT RESPONSIVE */
+@media (max-width: 1000px) {
+  .panel-right {
+    width: 100% !important;
+  }
+}
+
+/* ZONE 6 - TOPBAR RESPONSIVE */
+@media (max-width: 700px) {
+  .topbar {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  
+  .actions {
+    gap: 16px;
+  }
+  
+  .burger-menu:hover span {
+    background-color: #F1F5F9;
+  }
+  
+  .burger-menu:focus-visible span {
+    background-color: #3B82F6;
+  }
+}
+
+/* ZONE 7 - MAIN CONTENT RESPONSIVE */
+@media (max-width: 900px) {
+  .main-content {
+    padding: 16px;
+  }
+  
+  .panel {
+    padding: 16px;
+  }
+  
+  .tabs {
+    overflow-x: auto;
+    gap: 12px;
+  }
+  
+  .search-bar {
+    width: 100%;
+  }
+}
+
+@media (max-width: 700px) {
+  .main-content {
+    padding: 8px;
+  }
+  
+  .panel {
+    padding: 12px;
+    min-height: 240px;
+  }
+  
+  .tabs {
+    gap: 8px;
+  }
+  
+  .tabs .tab {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
+
+/* ZONE 8 - PANEL DROIT RESPONSIVE */
+@media (max-width: 1000px) {
+  .panel-right {
+    width: 100% !important;
+    margin-top: 16px;
+  }
+}
+
+/* Shadow panel */
+.shadow-panel {
+  box-shadow: 0 4px 20px rgba(36, 145, 255, 0.1);
+}
