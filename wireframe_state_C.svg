@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1365" height="768" viewBox="0 0 1365 768">
+  <!-- Z1: Header -->
+  <rect x="0" y="0" width="1365" height="72" fill="none" stroke="#00FF00" stroke-dasharray="6,6"/>
+  
+  <!-- Z2: Left panel -->
+  <rect x="24" y="72" width="258" height="548" fill="none" stroke="#FFAA00" stroke-dasharray="6,6"/>
+  
+  <!-- Z3: Main canvas with expanded cluster -->
+  <rect x="282" y="72" width="576" height="548" fill="none" stroke="#00AEEF" stroke-dasharray="6,6"/>
+  
+  <!-- Central node -->
+  <circle cx="570" cy="346" r="48" fill="none" stroke="#B0F8F8" stroke-dasharray="4,4" stroke-width="3"/>
+  
+  <!-- Expanded peripheral nodes (moved outward) -->
+  <circle cx="420" cy="260" r="20" fill="none" stroke="#689098" stroke-dasharray="4,4" stroke-width="2"/>
+  <circle cx="720" cy="260" r="20" fill="none" stroke="#689098" stroke-dasharray="4,4" stroke-width="2"/>
+  <circle cx="420" cy="440" r="20" fill="none" stroke="#689098" stroke-dasharray="4,4" stroke-width="2"/>
+  <circle cx="720" cy="440" r="20" fill="none" stroke="#689098" stroke-dasharray="4,4" stroke-width="2"/>
+  
+  <!-- Outer nodes -->
+  <circle cx="500" cy="180" r="16" fill="none" stroke="#A88020" stroke-dasharray="4,4" stroke-width="1"/>
+  <circle cx="640" cy="180" r="16" fill="none" stroke="#A88020" stroke-dasharray="4,4" stroke-width="1"/>
+  <circle cx="500" cy="520" r="16" fill="none" stroke="#A88020" stroke-dasharray="4,4" stroke-width="1"/>
+  <circle cx="640" cy="520" r="16" fill="none" stroke="#A88020" stroke-dasharray="4,4" stroke-width="1"/>
+  
+  <!-- Spider web effect - new edges drawing outward -->
+  <line x1="570" y1="346" x2="420" y2="260" stroke="#B0F8F8" stroke-width="2" opacity="0.9" stroke-dasharray="8,4"/>
+  <line x1="570" y1="346" x2="720" y2="260" stroke="#B0F8F8" stroke-width="2" opacity="0.9" stroke-dasharray="8,4"/>
+  <line x1="570" y1="346" x2="420" y2="440" stroke="#B0F8F8" stroke-width="2" opacity="0.9" stroke-dasharray="8,4"/>
+  <line x1="570" y1="346" x2="720" y2="440" stroke="#B0F8F8" stroke-width="2" opacity="0.9" stroke-dasharray="8,4"/>
+  
+  <!-- Secondary connections -->
+  <line x1="420" y1="260" x2="500" y2="180" stroke="#689098" stroke-width="1.5" opacity="0.6" stroke-dasharray="6,3"/>
+  <line x1="720" y1="260" x2="640" y2="180" stroke="#689098" stroke-width="1.5" opacity="0.6" stroke-dasharray="6,3"/>
+  <line x1="420" y1="440" x2="500" y2="520" stroke="#689098" stroke-width="1.5" opacity="0.6" stroke-dasharray="6,3"/>
+  <line x1="720" y1="440" x2="640" y2="520" stroke="#689098" stroke-width="1.5" opacity="0.6" stroke-dasharray="6,3"/>
+  
+  <!-- Z4: Right sidebar -->
+  <rect x="858" y="72" width="360" height="548" fill="none" stroke="#FF00AA" stroke-dasharray="6,6"/>
+  
+  <!-- Z5: Timeline -->
+  <rect x="0" y="620" width="1365" height="148" fill="none" stroke="#AA00FF" stroke-dasharray="6,6"/>
+  
+  <!-- Timeline playhead -->
+  <line x1="682" y1="640" x2="682" y2="680" stroke="#3B82F6" stroke-width="2"/>
+  <circle cx="682" cy="660" r="8" fill="#3B82F6"/>
+</svg>

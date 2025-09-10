@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1365" height="768" viewBox="0 0 1365 768">
+  <!-- Z1: Header -->
+  <rect x="0" y="0" width="1365" height="72" fill="none" stroke="#00FF00" stroke-dasharray="6,6"/>
+  
+  <!-- Z2: Left panel -->
+  <rect x="24" y="72" width="258" height="548" fill="none" stroke="#FFAA00" stroke-dasharray="6,6"/>
+  
+  <!-- Z3: Main canvas with emphasized central node -->
+  <rect x="282" y="72" width="576" height="548" fill="none" stroke="#00AEEF" stroke-dasharray="6,6"/>
+  
+  <!-- Central node emphasized (larger with glow) -->
+  <circle cx="570" cy="346" r="48" fill="none" stroke="#B0F8F8" stroke-dasharray="4,4" stroke-width="3"/>
+  <circle cx="570" cy="346" r="56" fill="none" stroke="#B0F8F8" stroke-dasharray="2,2" stroke-width="1" opacity="0.5"/>
+  
+  <!-- Nearby nodes -->
+  <circle cx="450" cy="280" r="20" fill="none" stroke="#689098" stroke-dasharray="4,4" stroke-width="2"/>
+  <circle cx="690" cy="280" r="20" fill="none" stroke="#689098" stroke-dasharray="4,4" stroke-width="2"/>
+  <circle cx="450" cy="420" r="20" fill="none" stroke="#689098" stroke-dasharray="4,4" stroke-width="2"/>
+  <circle cx="690" cy="420" r="20" fill="none" stroke="#689098" stroke-dasharray="4,4" stroke-width="2"/>
+  
+  <!-- Peripheral nodes -->
+  <circle cx="520" cy="200" r="16" fill="none" stroke="#A88020" stroke-dasharray="4,4" stroke-width="1"/>
+  <circle cx="620" cy="200" r="16" fill="none" stroke="#A88020" stroke-dasharray="4,4" stroke-width="1"/>
+  <circle cx="520" cy="500" r="16" fill="none" stroke="#A88020" stroke-dasharray="4,4" stroke-width="1"/>
+  <circle cx="620" cy="500" r="16" fill="none" stroke="#A88020" stroke-dasharray="4,4" stroke-width="1"/>
+  
+  <!-- Enhanced links to central node -->
+  <line x1="450" y1="280" x2="570" y2="346" stroke="#B0F8F8" stroke-width="2" opacity="0.7"/>
+  <line x1="690" y1="280" x2="570" y2="346" stroke="#B0F8F8" stroke-width="2" opacity="0.7"/>
+  <line x1="450" y1="420" x2="570" y2="346" stroke="#B0F8F8" stroke-width="2" opacity="0.7"/>
+  <line x1="690" y1="420" x2="570" y2="346" stroke="#B0F8F8" stroke-width="2" opacity="0.7"/>
+  
+  <!-- Z4: Right sidebar -->
+  <rect x="858" y="72" width="360" height="548" fill="none" stroke="#FF00AA" stroke-dasharray="6,6"/>
+  
+  <!-- Z5: Timeline -->
+  <rect x="0" y="620" width="1365" height="148" fill="none" stroke="#AA00FF" stroke-dasharray="6,6"/>
+  
+  <!-- Timeline playhead -->
+  <line x1="682" y1="640" x2="682" y2="680" stroke="#3B82F6" stroke-width="2"/>
+  <circle cx="682" cy="660" r="8" fill="#3B82F6"/>
+</svg>

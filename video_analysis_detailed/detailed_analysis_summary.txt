@@ -1,0 +1,93 @@
+# Detailed Analysis Summary - 30fps High Resolution
+
+## Video Analysis Summary
+- **Total frames analyzed**: 481
+- **Video duration**: 16.0 seconds
+- **Effective FPS**: 30.1
+- **Playhead detected in**: 481 frames (100.0%)
+
+## Nodes Detection - Detailed Statistics
+- **Average nodes per frame**: 5.77
+- **Standard deviation**: 6.23
+- **Minimum nodes**: 0
+- **Maximum nodes**: 16
+- **Median nodes**: 1.0
+- **Stability**: 107.9% (lower = more stable)
+
+## Edges Density - Detailed Statistics
+- **Average density**: 10.053
+- **Standard deviation**: 3.479
+- **Minimum density**: 1.989
+- **Maximum density**: 15.280
+- **Median density**: 9.367
+- **Trend**: 0.017663 (positive = increasing)
+
+## Color Analysis - Zone Averages
+
+### Header Zone
+- **Average RGB**: (14, 7, 7)
+- **Hex equivalent**: #0d0607
+
+### Main Zone (Canvas)
+- **Average RGB**: (42, 29, 25)
+- **Hex equivalent**: #291d18
+
+### Right Zone (Sidebar)
+- **Average RGB**: (48, 34, 29)
+- **Hex equivalent**: #30221c
+
+### Timeline Zone
+- **Average RGB**: (17, 11, 10)
+- **Hex equivalent**: #100b0a
+
+## Key Insights from 30fps Analysis
+
+### 1. System Stability
+- **Nodes system**: Variable
+- **Consistent node count**: 6 ± 6.2
+- **Edge complexity**: Increasing
+
+### 2. Timeline Interaction
+- **Playhead activity**: 100.0% of frames
+- **Interaction level**: High
+
+### 3. Visual Complexity
+- **Edge density range**: 2.0 - 15.3
+- **Complexity trend**: Growing
+- **Variability**: 3.48 standard deviation
+
+## Recommendations for Clone Implementation
+
+### 1. Node System
+- **Target node count**: 6 nodes
+- **Stability requirement**: Keep nodes stable (variance < 6.2)
+- **Visual consistency**: Maintain consistent node appearance
+
+### 2. Edge System
+- **Initial density**: 2.0
+- **Target density**: 15.3
+- **Growth rate**: 0.017663 per frame
+- **Animation**: Implement progressive edge complexity
+
+### 3. Timeline System
+- **Activity level**: 100.0% active
+- **Movement pattern**: Implement non-linear playhead movement
+- **Responsiveness**: Ensure smooth timeline interaction
+
+### 4. Color System
+- **Header**: #0d0607
+- **Main**: #291d18
+- **Right**: #30221c
+- **Timeline**: #100b0a
+
+## Technical Specifications
+- **Frame rate**: 30fps effective
+- **Analysis resolution**: 33ms intervals
+- **Data points**: 481 frames
+- **Accuracy**: High-resolution temporal analysis
+
+## Data Quality Assessment
+- **Completeness**: 481 frames analyzed
+- **Temporal resolution**: 33.3ms per frame
+- **Node detection**: 100.0% frames with playhead
+- **Color consistency**: All zones analyzed
