@@ -1,0 +1,49 @@
+{
+  "name": "handshake-influence-dashboard",
+  "version": "1.0.0",
+  "description": "Handshake Influence Dashboard - Electron Desktop Application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "build": "electron-builder",
+    "build-win": "electron-builder --win",
+    "dist": "electron-builder --publish=never",
+    "analyze": "python analyze_dash_video.py"
+  },
+  "devDependencies": {
+    "electron": "^38.0.0",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "com.handshake.dashboard",
+    "productName": "Handshake Influence Dashboard",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "index.html",
+      "styles.css",
+      "script.js",
+      "package.json"
+    ],
+    "win": {
+      "target": "nsis",
+      "forceCodeSigning": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  },
+  "keywords": [
+    "dashboard",
+    "influence",
+    "network",
+    "electron",
+    "desktop"
+  ],
+  "author": "Handshake Team",
+  "license": "MIT"
+}

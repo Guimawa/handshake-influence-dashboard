@@ -1,0 +1,485 @@
+/* Reset et base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #ffffff;
+    color: #000000;
+    overflow: hidden;
+    height: 100vh;
+}
+
+/* Header - Zone supérieure */
+.header-zone {
+    background-color: #ffffff;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 20px;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #3B82F6, #10B981);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+}
+
+.app-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: #000000;
+}
+
+.navigator-section {
+    display: flex;
+    align-items: center;
+}
+
+.navigator-select {
+    padding: 8px 12px;
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 6px;
+    color: #ffffff;
+    font-size: 14px;
+    outline: none;
+    cursor: pointer;
+}
+
+.search-section {
+    flex: 1;
+    max-width: 300px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px 16px;
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 14px;
+    outline: none;
+}
+
+.search-input::placeholder {
+    color: #666666;
+}
+
+.mode-tabs {
+    display: flex;
+    gap: 8px;
+}
+
+.mode-tab {
+    padding: 8px 16px;
+    background-color: transparent;
+    border: 1px solid #333;
+    border-radius: 6px;
+    color: #cccccc;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.mode-tab.active {
+    background-color: #3B82F6;
+    border-color: #3B82F6;
+    color: #ffffff;
+}
+
+.mode-tab:hover:not(.active) {
+    background-color: #2a2a2a;
+    border-color: #444;
+}
+
+/* Layout principal */
+.main-container {
+    display: flex;
+    height: calc(100vh - 80px - 120px);
+    width: 100%;
+}
+
+/* Zone gauche - Filtres */
+.left-sidebar {
+    width: 250px;
+    background-color: #120d0c;
+    border-right: 1px solid #333;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.filters-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.score-filter, .actors-filter, .geographic-filter {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.score-filter label, .actors-filter label, .geographic-filter label {
+    color: #cccccc;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.score-slider-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.score-min, .score-max {
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.score-slider {
+    width: 80px;
+    height: 4px;
+    background-color: #333;
+    outline: none;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.score-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    background-color: #3B82F6;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.actors-select, .geographic-select {
+    padding: 6px 10px;
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 4px;
+    color: #ffffff;
+    font-size: 12px;
+    outline: none;
+    cursor: pointer;
+}
+
+.zoom-controls {
+    display: flex;
+    gap: 5px;
+}
+
+.zoom-btn {
+    width: 28px;
+    height: 28px;
+    background-color: #2a2a2a;
+    border: 1px solid #444;
+    border-radius: 4px;
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.zoom-btn:hover {
+    background-color: #3B82F6;
+}
+
+.indicators {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.grouped-indicator, .favorites-indicator {
+    color: #cccccc;
+    font-size: 12px;
+}
+
+.user-profile {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Zone centrale - Graphe réseau */
+.main-content {
+    flex: 1;
+    background-color: #231815;
+    position: relative;
+    overflow: hidden;
+}
+
+.network-area {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#network-container {
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+}
+
+/* Styles pour D3.js */
+.node {
+    cursor: pointer;
+}
+
+.node circle {
+    transition: all 0.3s ease;
+}
+
+.node:hover circle {
+    transform: scale(1.1);
+}
+
+.link {
+    stroke: #999;
+    stroke-opacity: 0.6;
+    transition: all 0.3s ease;
+}
+
+.link:hover {
+    stroke: #FFD700;
+    stroke-width: 3px;
+}
+
+/* Classement d'influence */
+.ranking-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.ranking-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.ranking-position {
+    font-weight: bold;
+    font-size: 14px;
+    margin-right: 12px;
+    min-width: 20px;
+}
+
+.ranking-info {
+    flex: 1;
+}
+
+.ranking-name {
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+
+.ranking-score {
+    font-size: 10px;
+    color: #666;
+}
+
+.empty-network {
+    text-align: center;
+    color: #666666;
+    font-size: 16px;
+}
+
+.empty-network p {
+    padding: 40px;
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    border: 1px dashed #333;
+    display: inline-block;
+}
+
+/* Zone droite - Classement d'influence */
+.right-sidebar {
+    width: 300px;
+    background-color: #271b19;
+    border-left: 1px solid #333;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.ranking-section h3 {
+    color: #cccccc;
+    font-size: 16px;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.ranking-list {
+    height: 100%;
+}
+
+.empty-ranking {
+    text-align: center;
+    color: #666666;
+    font-size: 14px;
+    padding: 20px;
+    background-color: #1a1a1a;
+    border-radius: 6px;
+    border: 1px dashed #333;
+}
+
+/* Timeline - Zone inférieure */
+.timeline-zone {
+    background-color: #070505;
+    height: 120px;
+    border-top: 1px solid #333;
+    padding: 15px 20px;
+    position: relative;
+}
+
+.timeline-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.timeline-container h3 {
+    color: #cccccc;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.year-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.year-btn {
+    width: 24px;
+    height: 24px;
+    background-color: #2a2a2a;
+    border: 1px solid #444;
+    border-radius: 4px;
+    color: #ffffff;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.year-btn:hover {
+    background-color: #3B82F6;
+}
+
+.year-display {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.timeline-track {
+    position: relative;
+    height: 40px;
+    background-color: #1a1a1a;
+    border-radius: 20px;
+    border: 1px solid #333;
+    overflow: hidden;
+}
+
+.timeline-months {
+    position: absolute;
+    top: 5px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+    font-size: 10px;
+    color: #666666;
+}
+
+.timeline-slider {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.playhead {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 3px;
+    height: 100%;
+    background-color: #3B82F6;
+    border-radius: 2px;
+    z-index: 3;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .left-sidebar {
+        width: 200px;
+    }
+    
+    .right-sidebar {
+        width: 250px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column;
+        height: auto;
+    }
+    
+    .left-sidebar, .right-sidebar {
+        width: 100%;
+        height: auto;
+    }
+    
+    .timeline-zone {
+        height: auto;
+        min-height: 100px;
+    }
+}

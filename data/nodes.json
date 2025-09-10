@@ -1,0 +1,150 @@
+{
+  "nodes": [
+    {
+      "id": "UN_Women",
+      "name": "UN Women",
+      "score": 95,
+      "region": "Global",
+      "category": "ONG",
+      "influence": 95,
+      "connections": 8
+    },
+    {
+      "id": "ILO",
+      "name": "International Labour Organization",
+      "score": 90,
+      "region": "Global",
+      "category": "ONG",
+      "influence": 90,
+      "connections": 6
+    },
+    {
+      "id": "Michael_Melton",
+      "name": "Michael Melton",
+      "score": 85,
+      "region": "USA",
+      "category": "Influenceur",
+      "influence": 85,
+      "connections": 5
+    },
+    {
+      "id": "Christopher_Hill",
+      "name": "Christopher Hill",
+      "score": 80,
+      "region": "Canada",
+      "category": "Influenceur",
+      "influence": 80,
+      "connections": 4
+    },
+    {
+      "id": "Sarah_Johnson",
+      "name": "Sarah Johnson",
+      "score": 75,
+      "region": "USA",
+      "category": "Influenceur",
+      "influence": 75,
+      "connections": 3
+    },
+    {
+      "id": "World_Bank",
+      "name": "World Bank",
+      "score": 88,
+      "region": "Global",
+      "category": "Institution",
+      "influence": 88,
+      "connections": 7
+    },
+    {
+      "id": "IMF",
+      "name": "International Monetary Fund",
+      "score": 92,
+      "region": "Global",
+      "category": "Institution",
+      "influence": 92,
+      "connections": 9
+    },
+    {
+      "id": "Gates_Foundation",
+      "name": "Bill & Melinda Gates Foundation",
+      "score": 87,
+      "region": "USA",
+      "category": "Fondation",
+      "influence": 87,
+      "connections": 6
+    },
+    {
+      "id": "Oxfam",
+      "name": "Oxfam International",
+      "score": 82,
+      "region": "Global",
+      "category": "ONG",
+      "influence": 82,
+      "connections": 5
+    },
+    {
+      "id": "Amnesty_International",
+      "name": "Amnesty International",
+      "score": 89,
+      "region": "Global",
+      "category": "ONG",
+      "influence": 89,
+      "connections": 7
+    },
+    {
+      "id": "Greenpeace",
+      "name": "Greenpeace",
+      "score": 84,
+      "region": "Global",
+      "category": "ONG",
+      "influence": 84,
+      "connections": 4
+    },
+    {
+      "id": "David_Chen",
+      "name": "David Chen",
+      "score": 78,
+      "region": "Canada",
+      "category": "Influenceur",
+      "influence": 78,
+      "connections": 3
+    },
+    {
+      "id": "Maria_Rodriguez",
+      "name": "Maria Rodriguez",
+      "score": 76,
+      "region": "Mexico",
+      "category": "Influenceur",
+      "influence": 76,
+      "connections": 2
+    },
+    {
+      "id": "Tech_Corp",
+      "name": "Tech Innovation Corp",
+      "score": 81,
+      "region": "USA",
+      "category": "Entreprise",
+      "influence": 81,
+      "connections": 4
+    }
+  ],
+  "links": [
+    {"source": "UN_Women", "target": "ILO", "value": 5, "strength": 0.8},
+    {"source": "UN_Women", "target": "Michael_Melton", "value": 3, "strength": 0.6},
+    {"source": "ILO", "target": "Christopher_Hill", "value": 4, "strength": 0.7},
+    {"source": "World_Bank", "target": "IMF", "value": 6, "strength": 0.9},
+    {"source": "World_Bank", "target": "UN_Women", "value": 4, "strength": 0.7},
+    {"source": "IMF", "target": "Gates_Foundation", "value": 3, "strength": 0.5},
+    {"source": "Gates_Foundation", "target": "Oxfam", "value": 4, "strength": 0.6},
+    {"source": "Amnesty_International", "target": "Greenpeace", "value": 3, "strength": 0.5},
+    {"source": "Amnesty_International", "target": "UN_Women", "value": 5, "strength": 0.8},
+    {"source": "Michael_Melton", "target": "Sarah_Johnson", "value": 2, "strength": 0.4},
+    {"source": "Christopher_Hill", "target": "David_Chen", "value": 3, "strength": 0.5},
+    {"source": "Sarah_Johnson", "target": "Maria_Rodriguez", "value": 2, "strength": 0.3},
+    {"source": "Tech_Corp", "target": "Gates_Foundation", "value": 3, "strength": 0.5},
+    {"source": "Tech_Corp", "target": "Michael_Melton", "value": 2, "strength": 0.4},
+    {"source": "Oxfam", "target": "Greenpeace", "value": 4, "strength": 0.6},
+    {"source": "ILO", "target": "World_Bank", "value": 5, "strength": 0.8},
+    {"source": "David_Chen", "target": "Maria_Rodriguez", "value": 2, "strength": 0.3},
+    {"source": "IMF", "target": "ILO", "value": 4, "strength": 0.6}
+  ]
+}
